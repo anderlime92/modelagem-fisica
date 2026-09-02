@@ -15,14 +15,16 @@ CREATE TABLE usuarios (
 ```sql
 CREATE TABLE noticias (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    data DATETIME ou TIMESTAMP
+    data DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
     titulo VARCHAR(100)
     texto TEXT NULL
     imagem VARCHAR(100)
     resumo VARCHAR(260)
     destaque ENUM('sim', 'nao')
-    usuario_id
-    categorias_id
+    usuario_id INT NOT NULL
+    categorias_id INT NOT NULL
+    FOREIGN KEY (usuario_id) REFERENCES usuario(id)
+    FOREIGN KEY (categoria_id) REFERENCES categoria(id)
 )
 ```
 
