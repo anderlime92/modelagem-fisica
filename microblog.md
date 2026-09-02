@@ -6,33 +6,31 @@ CREATE DATABASE microblog CHARACTER SET utf8mb4;
 CREATE TABLE usuarios (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
-    tipo ENUM('admin', 'editor')
-    email VARCHAR(100) UNIQUE
-    senha VARCHAR(255)
-)
-```
-
-```sql
-CREATE TABLE noticias (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    data DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-    titulo VARCHAR(100)
-    texto TEXT NULL
-    imagem VARCHAR(100)
-    resumo VARCHAR(260)
-    destaque ENUM('sim', 'nao')
-    usuario_id INT NOT NULL
-    categorias_id INT NOT NULL
-    FOREIGN KEY (usuario_id) REFERENCES usuario(id)
-    FOREIGN KEY (categoria_id) REFERENCES categoria(id)
-)
+    email VARCHAR(100) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL
+    tipo ENUM('admin', 'editor') NOT NULL,
+);
 ```
 
 ```sql
 CREATE TABLE categorias (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
-    conteudo TEXT NULL
-    tipo ENUM('atualidades', 'etc')
-)
+);
+```
+
+```sql
+CREATE TABLE noticias (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(100) NOT NULL,
+    resumo TEXT NOT NULL,
+    texto TEXT NOT NULL,
+    imagem VARCHAR(100),
+    destaque ENUM('sim', 'nao') NOT NULL,
+    data DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    usuario_id INT NOT NULL,
+    categoria_id INT NOT NULL,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
+    FOREIGN KEY (categoria_id) REFERENCES categorias(id)
+);
 ```
